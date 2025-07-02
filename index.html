@@ -237,14 +237,30 @@
             color: var(--primary-color);
         }
         
-        /* --- ফুটার --- */
+        /* --- ফুটার (নতুন স্টাইল) --- */
         footer {
-            margin-top: 30px;
+            margin-top: 40px; /* স্পেস বাড়ানোর জন্য */
             text-align: center;
+        }
+        
+        footer a.contact-link {
+            display: inline-block;
+            padding: 12px 25px;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
             color: var(--primary-color);
-            font-size: 1rem;
+            text-decoration: none;
+            font-size: 1.1rem;
             font-weight: 700;
             text-shadow: 0 0 5px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        footer a.contact-link:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            box-shadow: 0 0 15px var(--shadow-color);
+            text-shadow: none;
         }
     </style>
 </head>
@@ -378,7 +394,10 @@
         </div>
     </div>
 
-    <footer>Made With PARV3Z</footer>
+    <!-- পরিবর্তিত ফুটার সেকশন -->
+    <footer>
+        <a href="https://www.facebook.com/parvez.akanda.2025" target="_blank" class="contact-link">Contact with developer</a>
+    </footer>
 
     <script>
         // --- ট্যাব সুইচিং ফাংশন ---
