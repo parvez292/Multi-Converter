@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything | Stylish Toolbox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- বেসিক স্টাইল --- */
+        :root {
+            --primary-color: #00ffff; /* Neon Cyan */
+            --dark-color: #0a0a1a;
+            --bg-color: #050510;
+            --text-color: #f0f0f0;
+            --shadow-color: rgba(0, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* --- হেডার এবং টাইটেল --- */
+        h1.main-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-shadow: 
+                0 0 5px var(--shadow-color),
+                0 0 10px var(--shadow-color),
+                0 0 20px var(--shadow-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* --- কন্টেইনার এবং টুলবক্স --- */
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background-color: var(--dark-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 
+                0 0 15px var(--shadow-color),
+                inset 0 0 10px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        /* --- ট্যাব নেভিগেশন --- */
+        .tab-nav {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .tab-button.active, .tab-button:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 8px var(--shadow-color);
+            opacity: 1;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- ফর্ম এলিমেন্ট --- */
+        .tool-box h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: #ccc;
+        }
+
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a1a2e;
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) sepia(100%) saturate(10000%) hue-rotate(180deg);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--shadow-color);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .radio-group input[type="radio"]{
+            accent-color: var(--primary-color);
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+        }
+
+        button.calc-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        button.calc-btn:hover {
+            background-color: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
+
+        /* --- ফলাফল প্রদর্শন --- */
+        .result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            border: 1px dashed var(--primary-color);
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #fff;
+            min-height: 80px;
+        }
+        .result-box span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        /* --- নতুন সেকশন: বর্ণনা বক্স --- */
+        .description-box {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 25px;
+            padding: 20px;
+            background-color: var(--dark-color);
+            border: 1px dashed var(--primary-color);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .desc-content {
+            display: none;
+        }
+
+        .desc-content.active {
+            display: block;
+        }
+        
+        .description-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px var(--shadow-color);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding-bottom: 8px;
+        }
+        
+        .description-box p, .description-box ul {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #ddd;
+        }
+        .description-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .description-box li {
+            padding: 5px 0;
+        }
+        .description-box li strong {
+            color: var(--primary-color);
+        }
+        
+        /* --- ফুটার --- */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1rem;
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--shadow-color);
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="main-title">হিসাব করুন এখন‌ই 🥰</h1>
+
+    <div class="container">
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="showTab('age', this)">বয়স</button>
+            <button class="tab-button" onclick="showTab('bmi', this)">BMI</button>
+            <button class="tab-button" onclick="showTab('bmr', this)">BMR</button>
+            <button class="tab-button" onclick="showTab('converter', this)">কনভার্টার</button>
+        </div>
+
+        <!-- বয়স ক্যালকুলেটর -->
+        <div id="age" class="tab-content active">
+            <div class="tool-box">
+                <h2>বয়স ক্যালকুলেটর</h2>
+                <div class="input-group">
+                    <label for="birthdate">আপনার জন্ম তারিখ দিন:</label>
+                    <input type="date" id="birthdate">
+                </div>
+                <button class="calc-btn" onclick="calculateAge()">বয়স হিসাব করুন</button>
+                <div class="result-box" id="ageResult"></div>
+            </div>
+        </div>
+
+        <!-- BMI ক্যালকুলেটর -->
+        <div id="bmi" class="tab-content">
+            <div class="tool-box">
+                <h2>BMI ক্যালকুলেটর</h2>
+                <div class="input-group">
+                    <label for="height-ft">উচ্চতা (ফুট):</label>
+                    <input type="number" id="height-ft" placeholder="যেমন: 5">
+                </div>
+                 <div class="input-group">
+                    <label for="height-in">উচ্চতা (ইঞ্চি):</label>
+                    <input type="number" id="height-in" placeholder="যেমন: 7">
+                </div>
+                <div class="input-group">
+                    <label for="weight-kg">ওজন (কেজি):</label>
+                    <input type="number" id="weight-kg" placeholder="যেমন: 65">
+                </div>
+                <button class="calc-btn" onclick="calculateBMI()">BMI হিসাব করুন</button>
+                <div class="result-box" id="bmiResult"></div>
+            </div>
+        </div>
+
+        <!-- BMR ক্যালকুলেটর -->
+        <div id="bmr" class="tab-content">
+            <div class="tool-box">
+                <h2>BMR ক্যালকুলেটর</h2>
+                <div class="input-group">
+                    <label>লিঙ্গ:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="male" checked> পুরুষ</label>
+                        <label><input type="radio" name="gender" value="female"> মহিলা</label>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="bmr-age">বয়স (বছর):</label>
+                    <input type="number" id="bmr-age" placeholder="যেমন: 28">
+                </div>
+                <div class="input-group">
+                    <label for="bmr-height-cm">উচ্চতা (সেন্টিমিটার):</label>
+                    <input type="number" id="bmr-height-cm" placeholder="যেমন: 170">
+                </div>
+                <div class="input-group">
+                    <label for="bmr-weight-kg">ওজন (কেজি):</label>
+                    <input type="number" id="bmr-weight-kg" placeholder="যেমন: 65">
+                </div>
+                <button class="calc-btn" onclick="calculateBMR()">BMR হিসাব করুন</button>
+                <div class="result-box" id="bmrResult"></div>
+            </div>
+        </div>
+        
+        <!-- কনভার্টার -->
+        <div id="converter" class="tab-content">
+             <div class="tool-box">
+                <h2>ইউনিট কনভার্টার</h2>
+                <div class="input-group">
+                    <label for="convert-type">কি রূপান্তর করবেন?</label>
+                    <select id="convert-type" onchange="updateConverterUI()">
+                        <option value="weight">ওজন (Weight)</option>
+                        <option value="area">ক্ষেত্রফল (Area)</option>
+                        <option value="temperature">তাপমাত্রা (Temperature)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="convert-value">মান:</label>
+                    <input type="number" id="convert-value" placeholder="মান লিখুন">
+                </div>
+                <div class="input-group">
+                    <label for="from-unit">থেকে:</label>
+                    <select id="from-unit"></select>
+                </div>
+                <div class="input-group">
+                    <label for="to-unit">তে:</label>
+                    <select id="to-unit"></select>
+                </div>
+                <button class="calc-btn" onclick="convert()">রূপান্তর করুন</button>
+                <div class="result-box" id="convertResult"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- নতুন বর্ণনা বক্সের সেকশন -->
+    <div class="description-box">
+        <div id="desc-age" class="desc-content active">
+            <h3>ব্যবহারের নিয়ম: বয়স ক্যালকুলেটর</h3>
+            <p>আপনার সঠিক বয়স বছর, মাস এবং দিনে জানতে আপনার জন্ম তারিখ নির্বাচন করুন এবং 'বয়স হিসাব করুন' বাটনে ক্লিক করুন।</p>
+        </div>
+        <div id="desc-bmi" class="desc-content">
+            <h3>BMI সম্পর্কিত তথ্য</h3>
+            <p>বডি মাস ইনডেক্স (BMI) হলো আপনার উচ্চতার সাপেক্ষে ওজনের একটি পরিমাপ। এটি আপনার স্বাস্থ্যকর ওজন সীমার মধ্যে আছে কিনা তা নির্দেশ করে।</p>
+            <ul>
+                <li><strong>18.5 এর নিচে:</strong> কম ওজন</li>
+                <li><strong>18.5 - 24.9:</strong> স্বাভাবিক ওজন</li>
+                <li><strong>25 - 29.9:</strong> অতিরিক্ত ওজন</li>
+                <li><strong>30 বা তার বেশি:</strong> স্থূলতা</li>
+            </ul>
+        </div>
+        <div id="desc-bmr" class="desc-content">
+            <h3>BMR সম্পর্কিত তথ্য</h3>
+            <p>বেসাল মেটাবলিক রেট (BMR) হলো পূর্ণ বিশ্রামে থাকাকালীন আপনার শরীর কত ক্যালোরি পোড়ায় তার পরিমাপ। এটি আপনার শরীরের মৌলিক কাজগুলো (যেমন: শ্বাস-প্রশ্বাস, রক্ত সঞ্চালন) চালু রাখতে প্রয়োজনীয় শক্তির পরিমাণ নির্দেশ করে।</p>
+        </div>
+        <div id="desc-converter" class="desc-content">
+            <h3>ব্যবহারের নিয়ম: ইউনিট কনভার্টার</h3>
+            <p>প্রথমে ড্রপডাউন থেকে আপনি কী রূপান্তর করতে চান (ওজন, ক্ষেত্রফল বা তাপমাত্রা) তা নির্বাচন করুন। তারপর মান, মূল ইউনিট এবং যে ইউনিটে রূপান্তর করতে চান তা নির্বাচন করে 'রূপান্তর করুন' বাটনে ক্লিক করুন।</p>
+        </div>
+    </div>
+
+    <footer>Made With PARV3Z</footer>
+
+    <script>
+        // --- ট্যাব সুইচিং ফাংশন ---
+        function showTab(tabId, element) {
+            // টুলবক্সের কন্টেন্ট সুইচ করা
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            // ট্যাবের বাটন একটিভ করা
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            element.classList.add('active');
+            
+            // --- নতুন কোড: বর্ণনা বক্স সুইচ করা ---
+            const descriptions = document.querySelectorAll('.desc-content');
+            descriptions.forEach(desc => desc.classList.remove('active'));
+            
+            const activeDescId = 'desc-' + tabId;
+            const activeDesc = document.getElementById(activeDescId);
+            if (activeDesc) {
+                activeDesc.classList.add('active');
+            }
+        }
+
+        // --- বয়স ক্যালকুলেটর ---
+        function calculateAge() {
+            const birthdateInput = document.getElementById('birthdate').value;
+            const resultBox = document.getElementById('ageResult');
+            
+            if (!birthdateInput) {
+                resultBox.innerHTML = 'অনুগ্রহ করে আপনার জন্ম তারিখ দিন।';
+                return;
+            }
+
+            const birthDate = new Date(birthdateInput);
+            const today = new Date();
+
+            if (birthDate > today) {
+                resultBox.innerHTML = 'জন্ম তারিখ ভবিষ্যতের হতে পারে না।';
+                return;
+            }
+
+            let ageYears = today.getFullYear() - birthDate.getFullYear();
+            let ageMonths = today.getMonth() - birthDate.getMonth();
+            let ageDays = today.getDate() - birthDate.getDate();
+
+            if (ageDays < 0) {
+                ageMonths--;
+                ageDays += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+
+            if (ageMonths < 0) {
+                ageYears--;
+                ageMonths += 12;
+            }
+
+            resultBox.innerHTML = `আপনার বয়স: <span>${ageYears}</span> বছর, <span>${ageMonths}</span> মাস, এবং <span>${ageDays}</span> দিন।`;
+        }
+
+        // --- BMI ক্যালকুলেটর ---
+        function calculateBMI() {
+            const heightFt = parseFloat(document.getElementById('height-ft').value);
+            const heightIn = parseFloat(document.getElementById('height-in').value) || 0;
+            const weightKg = parseFloat(document.getElementById('weight-kg').value);
+            const resultBox = document.getElementById('bmiResult');
+
+            if (isNaN(heightFt) || isNaN(weightKg)) {
+                resultBox.innerHTML = 'অনুগ্রহ করে সঠিক উচ্চতা এবং ওজন দিন।';
+                return;
+            }
+            
+            const totalHeightInches = (heightFt * 12) + heightIn;
+            const heightMeters = totalHeightInches * 0.0254;
+            
+            if (heightMeters <= 0) {
+                 resultBox.innerHTML = 'উচ্চতা অবশ্যই শূন্যের বেশি হতে হবে।';
+                 return;
+            }
+
+            const bmi = weightKg / (heightMeters * heightMeters);
+            let category = '';
+
+            if (bmi < 18.5) category = 'কম ওজন (Underweight)';
+            else if (bmi >= 18.5 && bmi < 25) category = 'স্বাভাবিক ওজন (Normal)';
+            else if (bmi >= 25 && bmi < 30) category = 'অতিরিক্ত ওজন (Overweight)';
+            else category = 'স্থূলতা (Obesity)';
+
+            resultBox.innerHTML = `আপনার BMI হলো: <span>${bmi.toFixed(2)}</span><br>আপনি <span>${category}</span> ক্যাটাগরিতে আছেন।`;
+        }
+        
+        // --- BMR ক্যালকুলেটর ---
+        function calculateBMR() {
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const age = parseInt(document.getElementById('bmr-age').value);
+            const heightCm = parseFloat(document.getElementById('bmr-height-cm').value);
+            const weightKg = parseFloat(document.getElementById('bmr-weight-kg').value);
+            const resultBox = document.getElementById('bmrResult');
+
+            if (isNaN(age) || isNaN(heightCm) || isNaN(weightKg)) {
+                resultBox.innerHTML = 'অনুগ্রহ করে সকল তথ্য পূরণ করুন।';
+                return;
+            }
+            
+            let bmr = 0;
+            // Mifflin-St Jeor Equation
+            if (gender === 'male') {
+                bmr = 10 * weightKg + 6.25 * heightCm - 5 * age + 5;
+            } else {
+                bmr = 10 * weightKg + 6.25 * heightCm - 5 * age - 161;
+            }
+            
+            resultBox.innerHTML = `আপনার বেসাল মেটাবলিক রেট (BMR) হলো <br><span>${bmr.toFixed(2)}</span> ক্যালোরি/দিন।`;
+        }
+        
+        // --- কনভার্টার ---
+        const units = {
+            weight: {
+                'কিলোগ্রাম (kg)': 1,
+                'গ্রাম (g)': 1000,
+                'পাউন্ড (lbs)': 2.20462,
+                'আউন্স (oz)': 35.274
+            },
+            area: {
+                'বর্গ মিটার (m²)': 1,
+                'বর্গ কিলোমিটার (km²)': 0.000001,
+                'বর্গ ফুট (ft²)': 10.7639,
+                'একর (acre)': 0.000247105,
+                'হেক্টর (hectare)': 0.0001
+            },
+            temperature: {
+                'সেলসিয়াস (°C)': 'c',
+                'ফারেনহাইট (°F)': 'f',
+                'কেলভিন (K)': 'k'
+            }
+        };
+
+        function updateConverterUI() {
+            const type = document.getElementById('convert-type').value;
+            const fromUnitSelect = document.getElementById('from-unit');
+            const toUnitSelect = document.getElementById('to-unit');
+            
+            fromUnitSelect.innerHTML = '';
+            toUnitSelect.innerHTML = '';
+
+            const unitOptions = units[type];
+            for (const unit in unitOptions) {
+                fromUnitSelect.innerHTML += `<option value="${unitOptions[unit]}">${unit}</option>`;
+                toUnitSelect.innerHTML += `<option value="${unitOptions[unit]}">${unit}</option>`;
+            }
+        }
+
+        function convert() {
+            const type = document.getElementById('convert-type').value;
+            const value = parseFloat(document.getElementById('convert-value').value);
+            const fromUnit = document.getElementById('from-unit').value;
+            const toUnit = document.getElementById('to-unit').value;
+            const resultBox = document.getElementById('convertResult');
+
+            if (isNaN(value)) {
+                resultBox.innerHTML = 'অনুগ্রহ করে একটি সঠিক মান দিন।';
+                return;
+            }
+            
+            let result;
+            if (type === 'temperature') {
+                let tempInC;
+                if (fromUnit === 'c') tempInC = value;
+                else if (fromUnit === 'f') tempInC = (value - 32) * 5 / 9;
+                else if (fromUnit === 'k') tempInC = value - 273.15;
+                
+                if (toUnit === 'c') result = tempInC;
+                else if (toUnit === 'f') result = (tempInC * 9 / 5) + 32;
+                else if (toUnit === 'k') result = tempInC + 273.15;
+            } else {
+                const valueInBase = value / fromUnit;
+                result = valueInBase * toUnit;
+            }
+            
+            const fromUnitText = document.getElementById('from-unit').options[document.getElementById('from-unit').selectedIndex].text;
+            const toUnitText = document.getElementById('to-unit').options[document.getElementById('to-unit').selectedIndex].text;
+
+            resultBox.innerHTML = `<span>${value}</span> ${fromUnitText} = <span>${result.toFixed(4)}</span> ${toUnitText}`;
+        }
+
+        // --- পেজ লোড হলে প্রাথমিক কাজ ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateConverterUI(); // কনভার্টার UI ঠিক করা
+            // প্রথম ট্যাব এবং তার বর্ণনা দেখানোর জন্য showTab কল করা হয়।
+            showTab('age', document.querySelector('.tab-button.active')); 
+        });
+    </script>
+</body>
+</html>
